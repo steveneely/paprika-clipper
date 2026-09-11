@@ -1,14 +1,9 @@
-# Paprika typography and style reference
+# Independent visual identity
 
-Inspected the public stylesheet on 2026-09-11:
+Version 0.1.3 uses system fonts only. Headings use Avenir Next, with Segoe UI and Arial fallbacks; body text uses the platform's system UI font. No font files, font services, or third-party stylesheets are included in the extension.
 
-- https://www.paprikaapp.com/static/css/custom.css
-- https://www.paprikaapp.com/static/css/bootstrap.min.css
+The design retains familiar recipe-app conventions while using its own clipboard icon, muted red accent (#b43e35), dark title, white header, warm gray panels, and 8 px controls. The header and footer explicitly identify this as an independent, unofficial extension.
 
-The website declares Futura / futura-pt for brand text, Montserrat at weight 400 for headings, and Helvetica Neue / Helvetica / Arial for body text. It imports Open Sans but the inspected body style does not use it. These are verified website declarations; we have not inspected fonts inside the native Paprika application.
+Paprika's public screenshots and CSS were inspected as references during earlier iterations. The exact Futura/Montserrat font treatment and Paprika brand red from version 0.1.2 have been replaced. The previously bundled Montserrat font and accompanying license files have been removed from the current extension tree; older Git commits retain the historical version.
 
-Version 0.1.2 applies these font roles, Paprika's brand red (#d10505), body color (#333), navbar background (#f8f8f8), panel background (#f5f5f5), panel borders (#ddd), 20 px panel padding, and Bootstrap-style 4 px control corners. The primary button uses the brand red. The layout is adapted to an extension popup rather than copying the site's complete Bootstrap stylesheet.
-
-Futura is used from the user's system if installed. It was present on the development Mac; other systems fall back to bundled Montserrat. Paprika's Adobe font kit and proprietary font files are not bundled or fetched at runtime. Montserrat comes from Google Fonts and is distributed with its OFL license.
-
-The original clipboard icon, unofficial subtitle, and non-affiliation footer remain visible to distinguish this extension from Paprika's official products.
+A non-affiliation notice is a transparency measure, not legal clearance. Keep the product visually distinct and use the Paprika name to identify the service it connects to.
