@@ -1,4 +1,4 @@
-import { BOOKMARKLET_URL, SAVE_URL, parseBookmarklet, validConnectionSender, canCapture, makePayload, classifyResponse } from './protocol.js';
+import { BOOKMARKLET_URL, SAVE_URL, parseBookmarklet, validConnectionSender, isBookmarkletPage, canCapture, makePayload, classifyResponse } from './protocol.js';
 import { capturePage } from './capture.js';
 
 const ready = Promise.all([
@@ -59,6 +59,11 @@ async function acceptToken(message, sender) {
   // A freshly connected account must not inherit another account's save history.
   const all = await chrome.storage.session.get(null);
   await chrome.storage.session.remove(Object.keys(all).filter(key => key.startsWith('save:')));
+  // Close only our connection tab, after the credential and cleanup are saved.
+  try {
+    const tab = await chrome.tabs.get(pending.tabId);
+    if (isBookmarkletPage(tab.url) && !tab.pendingUrl) await chrome.tabs.remove(tab.id);
+  } catch { /* Connection succeeded; the page notice is a fallback if closing fails. */ }
   return { connected: true };
 }
 

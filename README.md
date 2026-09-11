@@ -13,7 +13,7 @@ Version 0.1.3 uses system fonts only: Avenir Next / Segoe UI / Arial for heading
 1. Open `chrome://extensions` and enable **Developer mode**.
 2. Choose **Load unpacked** and select this repository's `extension` folder (on the development machine: `/Users/sneely/code/paprika-clipper/extension`). No build or Node installation is needed to load it.
 3. Pin **Paprika Clipper** using Chrome's extensions menu.
-4. Click its toolbar icon, then **Connect Paprika**. Sign in on the Paprika tab; the extension should display a connection notice automatically.
+4. Click its toolbar icon, then **Connect Paprika**. Sign in on the Paprika tab; the extension connects automatically and closes the tab it opened.
 5. Open a recipe webpage and click the toolbar icon again. The page will be captured and submitted immediately.
 6. Open Paprika and verify the recipe appears. The prototype reports **Sent to Paprika**, not a confirmed save, until live response semantics are established.
 
@@ -43,7 +43,7 @@ See [manual verification](docs/manual-verification.md) for the remaining live ch
 
 1. Click **Connect Paprika** in the extension.
 2. Log in on Paprika's own bookmarklet page, if needed.
-3. The extension detects the generated bookmarklet, stores its token locally, and displays **Connected**.
+3. The extension detects the generated bookmarklet, stores its token locally, and closes its connection tab.
 4. Click the toolbar button on a recipe page to send that page to Paprika for extraction and saving.
 
 The normal onboarding flow should require no copying code or editing settings. Automatic bookmarklet detection still needs to be verified on the authenticated page.

@@ -62,20 +62,25 @@ try {
     console.log(`Rendered font ${selector}: ${fonts.map(font => font.familyName).join(', ')}`);
   }
   await fontSession.detach();
+  const unrelatedPaprika = await context.newPage();
+  await unrelatedPaprika.goto('https://www.paprikaapp.com/bookmarklet/');
+  await settings.bringToFront();
   const newPage = context.waitForEvent('page');
   await settings.getByRole('button', { name: /Connect Paprika/ }).click();
   const connectPage = await newPage;
   await connectPage.waitForURL('https://www.paprikaapp.com/bookmarklet/');
   await connectPage.waitForLoadState('domcontentloaded');
+  const connectionClosed = connectPage.waitForEvent('close');
   await connectPage.evaluate(() => {
     const link = document.createElement('a');
     link.href = "javascript:save('//www.paprikaapp.com/bookmarklet/v1?token=0123456789abcdef&timestamp=0')";
     link.textContent = 'Save recipe';
     document.body.append(link);
   });
-  await connectPage.getByRole('status').filter({ hasText: 'Paprika Clipper connected' }).waitFor();
+  await connectionClosed;
+  assert.equal(unrelatedPaprika.isClosed(), false);
   assert.equal(await worker.evaluate(async () => (await chrome.storage.local.get('token')).token), '0123456789abcdef');
-  console.log('PASS automatic connection after login markup appears');
+  console.log('PASS connection stores the token and closes only its own login tab');
 
   const recipe = await context.newPage();
   await recipe.goto('https://recipe.example/soup?q=50%25');

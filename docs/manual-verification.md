@@ -6,7 +6,7 @@ Automated tests use synthetic credentials and intercepted server responses. They
 
 - Load the `extension` directory unpacked in Chrome and pin its toolbar icon.
 - Click Connect Paprika. Confirm the destination is Paprika's official HTTPS bookmarklet page.
-- Sign in normally. Confirm a **Paprika Clipper connected** notice appears without copying code.
+- Sign in normally. Confirm the extension-created connection tab closes automatically without copying code, and the popup shows Connected. Other Paprika tabs must stay open.
 - Also test starting while already signed in to Paprika.
 - If detection fails, inspect the generated bookmarklet's DOM structure locally. Do not commit page captures or copy real bookmarklet tokens into issue reports, logs, tests, or screenshots.
 - Close/reopen Chrome and confirm the connection persists.
