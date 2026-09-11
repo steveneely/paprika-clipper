@@ -12,28 +12,28 @@
   --secondary: #666;
 }
 * { box-sizing: border-box; }
-body { margin: 0; width: 376px; font-family: inherit; font-size: inherit; line-height: inherit; color: inherit; }
-header { display: flex; align-items: center; gap: 12px; padding: 20px; background: #fff; border-bottom: 1px solid var(--line); }
-.mark { flex: 0 0 auto; border-radius: 9px; }
+body { margin: 0; width: 320px; font-family: inherit; font-size: inherit; line-height: inherit; color: inherit; }
+header { display: flex; align-items: center; gap: 9px; padding: 12px 14px; background: #fff; border-bottom: 1px solid var(--line); }
+.mark { width: 28px; height: 28px; flex: 0 0 auto; border-radius: 9px; }
 .brand { display: flex; flex-direction: column; gap: 4px; }
-.brand-name { font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif; color: #343138; font-size: 23px; font-weight: 400; line-height: 1.1; }
-.account-row { display: flex; align-items: center; justify-content: space-between; min-height: 41px; padding: 10px 20px; background: #f6f5f3; border-top: 1px solid var(--line); font-size: 12px; }
+.brand-name { font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif; color: #343138; font-size: 20px; font-weight: 400; line-height: 1.1; }
+.account-row { display: flex; align-items: center; justify-content: space-between; min-height: 36px; padding: 0 14px; background: #f6f5f3; border-top: 1px solid var(--line); font-size: 12px; }
 .connection { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
 .connection::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #999; }
 .connection[data-connected="true"]::before { background: #2d8250; }
-.content { padding: 20px; }
-h1 { margin: 0; font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif; font-size: 24px; line-height: 1.1; font-weight: 400; }
-#message { margin: 10px 0 0; color: var(--secondary); font-size: 14px; line-height: 1.428571429; }
-.actions { display: grid; gap: 14px; margin-top: 22px; }
+.content { padding: 14px; }
+h1 { margin: 0; font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif; font-size: 20px; line-height: 1.1; font-weight: 400; }
+#message { margin: 6px 0 0; color: var(--secondary); font-size: 14px; line-height: 1.428571429; }
+.actions { display: grid; gap: 8px; margin-top: 12px; }
 .actions:not(:has(> :not([hidden]))) { margin-top: 0; }
 button { font: inherit; cursor: pointer; }
-.actions > button { width: 100%; min-height: 40px; border: 1px solid var(--red); border-radius: 8px; padding: 10px 16px; background: var(--red); color: #fff; font-size: 14px; line-height: 1.428571429; font-weight: 400; text-align: center; }
+.actions > button { width: 100%; min-height: 36px; border: 1px solid var(--red); border-radius: 8px; padding: 7px 12px; background: var(--red); color: #fff; font-size: 14px; line-height: 1.428571429; font-weight: 400; text-align: center; }
 .actions > button:hover:not(:disabled) { background: var(--red-hover); border-color: var(--red-hover); }
 .actions > button:disabled { background: #f4f4f4; color: #737373; border-color: #dedede; cursor: default; }
 button:focus-visible, input:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 .text-button { padding: 8px 0; color: var(--red); background: none; border: 0; font-size: 11px; }
 .text-button:disabled { color: #888; cursor: default; }
-footer { padding: 15px 20px; background: #f6f5f3; border-top: 1px solid var(--line); color: var(--secondary); font-size: 11px; line-height: 1.5; }
+footer { padding: 8px 14px; background: #f6f5f3; border-top: 1px solid var(--line); color: var(--secondary); font-size: 11px; line-height: 1.5; }
 [hidden] { display: none !important; }
-body[data-view="settings"] { width: min(100%, 420px); margin: 40px auto; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 1px #0000000d; }
+body[data-view="settings"] { width: min(100%, 320px); margin: 20px auto; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 1px #0000000d; }
 @media (prefers-reduced-motion: no-preference) { button { transition: background .15s, border-color .15s; } }
