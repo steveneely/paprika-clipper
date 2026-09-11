@@ -17,7 +17,7 @@ Version 0.1.3 uses system fonts only: Avenir Next / Segoe UI / Arial for heading
 5. Open a recipe webpage and click the toolbar icon again. The page will be captured and submitted immediately.
 6. Open Paprika and verify the recipe appears. The prototype reports **Sent to Paprika**, not a confirmed save, until live response semantics are established.
 
-Reopening the popup on the same page in the same tab does not automatically submit it again. To send it again, check Paprika first, then use the explicit retry control. A network timeout never triggers an automatic retry.
+Reopening the popup on the same page in the same tab does not automatically submit it again. Submitted pages and uncertain outcomes have no save-again control. Retry is offered only after a definite failure. A network timeout never triggers an automatic retry. This guard tracks the current page in each tab during the browser session; it does not check the Paprika library or deduplicate across tabs or browser restarts.
 
 Use the extension's **Options** page to view connection status or disconnect without saving a page. A suggested shortcut is **Alt+Shift+P**; Chrome lets you customize it at `chrome://extensions/shortcuts`.
 

@@ -33,7 +33,7 @@ async function state(tabId) {
   const stored = await chrome.storage.session.get(['pending', statusKey(tabId)]);
   let save = stored[statusKey(tabId)] || null;
   if (save && ['capturing', 'sending'].includes(save.kind) && !inFlight.has(tabId)) {
-    save = await setStatus(tabId, { ...save, kind: 'uncertain', message: 'The save was interrupted. Check Paprika before trying again.' });
+    save = await setStatus(tabId, { ...save, kind: 'uncertain', message: 'The save was interrupted. Check your recipes in Paprika. This page will not be sent again automatically.' });
   }
   return { connected: Boolean(token), connecting: stored.pending?.expiresAt > Date.now(), save };
 }
@@ -91,7 +91,7 @@ async function performSave(tabId, expectedUrl) {
     const body = await response.text();
     return await setStatus(tabId, { url: expectedUrl, ...classifyResponse(response.status, body, response.headers.get('content-type') || '') });
   } catch (error) {
-    const message = submitted ? 'The response was interrupted. The recipe may have saved. Check Paprika before trying again.' :
+    const message = submitted ? 'The response was interrupted. The recipe may have saved. Check your recipes in Paprika. This page will not be sent again automatically.' :
       /too large|page changed|connection changed|page is not ready/i.test(error.message) ? error.message :
         'Chrome could not capture this page. Refresh the recipe page and try again.';
     return await setStatus(tabId, { url: expectedUrl, kind: submitted ? 'uncertain' : 'error', message });
@@ -104,7 +104,7 @@ async function save(tabId, url, retry) {
   // Register the lock before awaiting storage to prevent simultaneous invocations.
   const job = (async () => {
     const stored = (await chrome.storage.session.get(statusKey(tabId)))[statusKey(tabId)];
-    if (stored?.url === url && !retry) return stored;
+    if (stored?.url === url && (!retry || stored.kind !== 'error')) return stored;
     return performSave(tabId, url);
   })();
   inFlight.set(tabId, job);

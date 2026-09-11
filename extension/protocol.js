@@ -61,7 +61,7 @@ export function classifyResponse(status, body, contentType = '') {
     return { kind: 'reconnect', message: 'Paprika refused this request. Reconnect your account and try again.' };
   }
   if (status === 429) return { kind: 'error', message: 'Paprika is busy. Wait a little before trying again.' };
-  if (status >= 500) return { kind: 'uncertain', message: 'Paprika had a server error. Check your recipes before trying again.' };
+  if (status >= 500) return { kind: 'uncertain', message: 'Paprika had a server error. Check your recipes in Paprika. This page will not be sent again automatically.' };
   if (status < 200 || status >= 300) return { kind: 'error', message: `Paprika could not accept this request (HTTP ${status}).` };
   if (contentType.includes('application/json')) {
     try {
@@ -71,5 +71,5 @@ export function classifyResponse(status, body, contentType = '') {
       }
     } catch { /* Unknown response: never interpret it as confirmation. */ }
   }
-  return { kind: 'submitted', message: 'Page sent to Paprika. Open Paprika to confirm the recipe was saved before saving it again.' };
+  return { kind: 'submitted', message: 'Page sent to Paprika. Open Paprika to view your recipe and confirm it was saved.' };
 }

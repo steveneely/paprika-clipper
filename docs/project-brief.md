@@ -49,7 +49,7 @@ Permission design and exact implementation are provisional until the authenticat
 
 ## Prototype implementation status (2026-09-11)
 
-The Manifest V3 prototype is now in `extension/`. It includes automatic bookmarklet detection, connection validation, credential-restricted storage, bundled page capture, raw-DEFLATE payload encoding, direct HTTPS submission, popup feedback, and explicit retry/disconnect controls.
+The Manifest V3 prototype is now in `extension/`. It includes automatic bookmarklet detection, connection validation, credential-restricted storage, bundled page capture, raw-DEFLATE payload encoding, direct HTTPS submission, popup feedback, retry for definite failures, and disconnect controls. Submitted pages and uncertain outcomes do not offer resubmission.
 
 Nine Node/DOM checks passed. Isolated Chromium integration checks passed with synthetic onboarding pages, a fixture recipe, and intercepted Paprika responses. They verify connection detection, page capture and Unicode encoding, credential isolation, duplicate prevention, uncertain network outcomes, token rejection handling, and disconnect. No real credentials were used or committed.
 

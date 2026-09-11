@@ -6,7 +6,6 @@ const settings = location.hash === '#settings';
 if (settings) document.body.dataset.view = 'settings';
 let tab;
 let busy = false;
-let retryNeedsCheck = false;
 let polling;
 
 function render(state) {
@@ -17,7 +16,6 @@ function render(state) {
   el('disconnect').hidden = !connected;
   el('disconnect').disabled = false;
   el('retry').hidden = true;
-  el('check-label').hidden = true;
   el('detail').textContent = connected ? 'Your connection is stored only in this Chrome profile.' : 'Sign in on Paprika’s website. Your password stays there.';
   if (!connected) {
     el('heading').textContent = state.connecting ? 'Finish connecting' : 'Connect to Paprika';
@@ -39,12 +37,9 @@ function render(state) {
   if (save?.kind === 'reconnect') {
     el('connect').hidden = false;
     el('connect').textContent = 'Reconnect Paprika ↗';
-  } else if (!saving) {
-    retryNeedsCheck = ['submitted', 'uncertain'].includes(save.kind);
+  } else if (save?.kind === 'error') {
     el('retry').hidden = false;
-    el('retry').textContent = retryNeedsCheck ? 'Save this page again' : 'Try again';
-    el('check-label').hidden = !retryNeedsCheck;
-    el('retry').disabled = busy || (retryNeedsCheck && !el('checked').checked);
+    el('retry').disabled = busy;
   }
 }
 
@@ -84,10 +79,8 @@ el('disconnect').addEventListener('click', async () => {
     await refresh();
   } catch { failure(); }
 });
-el('checked').addEventListener('change', () => { el('retry').disabled = busy || (retryNeedsCheck && !el('checked').checked); });
-el('retry').addEventListener('click', () => {
-  if (!retryNeedsCheck || el('checked').checked) { el('checked').checked = false; save(true); }
-});
+el('retry').addEventListener('click', () => save(true));
+
 try {
   [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   const initial = await refresh();
