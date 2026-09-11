@@ -1,10 +1,12 @@
 # Paprika Clipper
 
-An independent Chrome extension project for saving webpages to Paprika Recipe Manager, with recipe extraction and saving handled entirely by Paprika.
+An independent, unofficial Chrome extension for saving webpages to Paprika Recipe Manager, with recipe extraction and saving handled entirely by Paprika. Not affiliated with or endorsed by Paprika or Hindsight Labs.
 
 ## Status
 
-The unpacked Chrome prototype is implemented. Automated tests cover synthetic onboarding, page capture, payload encoding, token isolation, and save/error states. **A real Paprika login, live recipe save, and the manual Chrome toolbar permission flow still need verification.**
+The unpacked Chrome prototype is implemented, and the user reported the initial live flow working. Automated tests cover synthetic onboarding, page capture, payload encoding, token isolation, and save/error states. Exact live response semantics and recipe-field completeness have not been independently verified.
+
+Version 0.1.1 uses Paprika-inspired red accents, system typography, and white/gray panels, with a distinct clipboard icon. The popup, extension listing, toolbar tooltip, and connection notice all identify it as unofficial.
 
 ## Try it in Chrome
 

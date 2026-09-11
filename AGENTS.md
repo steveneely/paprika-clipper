@@ -9,3 +9,4 @@
 - Do not execute fetched bookmarklet code or arbitrary page code in the extension. Implement the required capture and submission logic as bundled code.
 - Distinguish page capture from recipe extraction. Capturing HTML and layout for Paprika is allowed; interpreting recipe ingredients or directions is out of scope.
 - Report actual verification status. A successful HTTP response alone must not be described as a confirmed recipe save unless its contents establish success.
+- Keep the UI visually consistent with Paprika's red accents and simple native-style layout, while clearly labeling the extension as unofficial and third party. Do not use Paprika's official logo or imply endorsement.

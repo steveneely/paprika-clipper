@@ -50,7 +50,7 @@ try {
   await settings.getByRole('button', { name: /Connect Paprika/ }).waitFor();
   await mkdir('work/screenshots', { recursive: true });
   await settings.setViewportSize({ width: 376, height: 445 });
-  await settings.screenshot({ path: 'work/screenshots/disconnected.png' });
+  await settings.locator('main').screenshot({ path: 'work/screenshots/disconnected.png' });
   const newPage = context.waitForEvent('page');
   await settings.getByRole('button', { name: /Connect Paprika/ }).click();
   const connectPage = await newPage;
@@ -96,7 +96,7 @@ try {
   assert.equal(denied, true);
   console.log('PASS real page capture, layout, Unicode payload, and credential isolation');
   await popup.setViewportSize({ width: 376, height: 520 });
-  await popup.screenshot({ path: 'work/screenshots/submitted.png' });
+  await popup.locator('main').screenshot({ path: 'work/screenshots/submitted.png' });
   await popup.reload();
   await popup.getByRole('heading', { name: 'Sent to Paprika.' }).waitFor();
   assert.equal(await worker.evaluate(() => globalThis.__uploads.length), 1);

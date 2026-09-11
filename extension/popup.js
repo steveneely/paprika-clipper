@@ -3,6 +3,7 @@ import { canCapture, isBookmarkletPage } from './protocol.js';
 const el = id => document.getElementById(id);
 const send = message => chrome.runtime.sendMessage(message);
 const settings = location.hash === '#settings';
+if (settings) document.body.dataset.view = 'settings';
 let tab;
 let busy = false;
 let retryNeedsCheck = false;
@@ -11,6 +12,7 @@ let polling;
 function render(state) {
   const connected = state.connected;
   el('connection').textContent = connected ? 'Connected' : 'Not connected';
+  el('connection').dataset.connected = String(Boolean(connected));
   el('connect').hidden = connected;
   el('disconnect').hidden = !connected;
   el('disconnect').disabled = false;
@@ -18,18 +20,18 @@ function render(state) {
   el('check-label').hidden = true;
   el('detail').textContent = connected ? 'Your connection is stored only in this Chrome profile.' : 'Sign in on Paprika’s website. Your password stays there.';
   if (!connected) {
-    el('heading').textContent = state.connecting ? 'Finish connecting.' : 'Recipes worth keeping.';
+    el('heading').textContent = state.connecting ? 'Finish connecting' : 'Connect to Paprika';
     el('message').textContent = state.connecting ? 'Sign in on the Paprika tab. We’ll connect automatically when your bookmarklet appears.' : 'Connect your Paprika account to save recipes straight from Chrome.';
     el('connect').textContent = state.connecting ? 'Return to Paprika ↗' : 'Connect Paprika ↗';
     return;
   }
   if (settings || !canCapture(tab?.url)) {
-    el('heading').textContent = 'Ready for a good recipe.';
+    el('heading').textContent = 'Ready to save recipes';
     el('message').textContent = isBookmarkletPage(tab?.url) ? 'You’re connected. Open a recipe webpage and click the Paprika Clipper toolbar button.' : 'Open a recipe webpage, then click the toolbar button to save it to Paprika.';
     return;
   }
   const save = state.save?.url === tab.url ? state.save : null;
-  const titles = { capturing: 'Preparing your page.', sending: 'Over to Paprika.', submitted: 'Sent to Paprika.', uncertain: 'Check your recipes.', error: 'Let’s try that again.', reconnect: 'Reconnect Paprika.' };
+  const titles = { capturing: 'Preparing your page.', sending: 'Sending to Paprika…', submitted: 'Sent to Paprika.', uncertain: 'Check your recipes.', error: 'Unable to save this page', reconnect: 'Reconnect Paprika.' };
   el('heading').textContent = titles[save?.kind] || 'Preparing your page.';
   el('message').textContent = save?.message || 'Getting this recipe page ready for Paprika…';
   const saving = !save || ['capturing', 'sending'].includes(save.kind);

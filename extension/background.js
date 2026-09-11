@@ -22,8 +22,8 @@ async function setStatus(tabId, status) {
   const badges = { capturing: '…', sending: '…', submitted: 'SENT', uncertain: '?', error: '!', reconnect: '!' };
   await Promise.allSettled([
     chrome.action.setBadgeText({ tabId, text: badges[state.kind] || '' }),
-    chrome.action.setBadgeBackgroundColor({ tabId, color: ['capturing', 'sending', 'submitted'].includes(state.kind) ? '#285442' : '#9d421f' }),
-    chrome.action.setTitle({ tabId, title: state.message })
+    chrome.action.setBadgeBackgroundColor({ tabId, color: '#d90824' }),
+    chrome.action.setTitle({ tabId, title: `Paprika Clipper (Unofficial): ${state.message}` })
   ]);
   return state;
 }

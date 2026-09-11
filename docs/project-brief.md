@@ -62,6 +62,10 @@ The prototype intentionally says **Sent to Paprika**, with an instruction to ver
 - Validate the bundled capture and submission against the live endpoint.
 - Verify one end-to-end save before broadening the UI or preparing store distribution.
 
+## User feedback and UI revision
+
+The user reported the initial prototype working, then requested styling consistent with Paprika and clear third-party identification. Version 0.1.1 adopts red accents, compact system typography, white content, and gray supporting sections based on Paprika's published Mac/iPhone screenshots. It uses an original clipboard icon rather than Paprika's official logo. The extension name, popup header/footer, toolbar tooltip, and connection notice identify the extension as unofficial. The user's report does not independently verify saved recipe fields or response semantics.
+
 ## Other API research
 
 Kappari was investigated as a protocol reference, but its broader sync integration is not the selected approach. It documents password-only v1 login with tokens used on v2 sync endpoints and structured recipe uploads. Compatibility between those API tokens and bookmarklet tokens is unverified. The project will not implement our own extraction to use the structured upload endpoint.
