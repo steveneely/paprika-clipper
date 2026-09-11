@@ -69,8 +69,12 @@ async function acceptToken(message, sender) {
 async function closeConnection(sender) {
   const key = `close:${sender.tab?.id}`;
   const closing = (await chrome.storage.session.get(key))[key];
-  if (!validConnectionSender(sender, closing) || closing.documentId !== sender.documentId ||
-      Date.now() < closing.closeAfter) return { closed: false };
+  if (!validConnectionSender(sender, closing) || closing.documentId !== sender.documentId) return { closed: false };
+  // Timers in the page and worker need not fire at exactly the same instant.
+  // Honor an early request by waiting, rather than dropping the only close attempt.
+  while (Date.now() < closing.closeAfter) {
+    await new Promise(resolve => setTimeout(resolve, closing.closeAfter - Date.now()));
+  }
   await chrome.storage.session.remove(key);
   try {
     const tab = await chrome.tabs.get(closing.tabId);

@@ -79,6 +79,12 @@ try {
   });
   await connectPage.getByRole('status').filter({ hasText: 'Closing this tab in 3 seconds' }).waitFor();
   const countdownStarted = Date.now();
+  // Reproduce a close request arriving before the worker's deadline.
+  await worker.evaluate(async () => {
+    const all = await chrome.storage.session.get(null);
+    const key = Object.keys(all).find(key => key.startsWith('close:'));
+    await chrome.storage.session.set({ [key]: { ...all[key], closeAfter: Date.now() + 3500 } });
+  });
   await connectPage.getByRole('status').filter({ hasText: 'Closing this tab in 2 seconds' }).waitFor();
   await connectPage.getByRole('status').filter({ hasText: 'Closing this tab in 1 second' }).waitFor();
   await connectionClosed;
