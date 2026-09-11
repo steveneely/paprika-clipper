@@ -30,6 +30,7 @@ h1 { margin: 0; font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif; font-
 .actions:not(:has(> :not([hidden]))) { margin-top: 0; }
 button { font: inherit; cursor: pointer; }
 .actions > button { width: 100%; min-height: 36px; border: 1px solid var(--red); border-radius: 8px; padding: 7px 12px; background: var(--red); color: #fff; font-size: 14px; line-height: 1.428571429; font-weight: 400; text-align: center; }
+#connect { width: calc(100% - 24px); justify-self: center; }
 .actions > button:hover:not(:disabled) { background: var(--red-hover); border-color: var(--red-hover); }
 .actions > button:disabled { background: #f4f4f4; color: #737373; border-color: #dedede; cursor: default; }
 button:focus-visible, input:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
