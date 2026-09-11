@@ -4,7 +4,38 @@ An independent Chrome extension project for saving webpages to Paprika Recipe Ma
 
 ## Status
 
-Project initialized. The first milestone is an unpacked Chrome extension prototype that validates automatic bookmarklet connection and an end-to-end save. No extension is implemented yet.
+The unpacked Chrome prototype is implemented. Automated tests cover synthetic onboarding, page capture, payload encoding, token isolation, and save/error states. **A real Paprika login, live recipe save, and the manual Chrome toolbar permission flow still need verification.**
+
+## Try it in Chrome
+
+1. Open `chrome://extensions` and enable **Developer mode**.
+2. Choose **Load unpacked** and select this repository's `extension` folder (on the development machine: `/Users/sneely/code/paprika-clipper/extension`). No build or Node installation is needed to load it.
+3. Pin **Paprika Clipper** using Chrome's extensions menu.
+4. Click its toolbar icon, then **Connect Paprika**. Sign in on the Paprika tab; the extension should display a connection notice automatically.
+5. Open a recipe webpage and click the toolbar icon again. The page will be captured and submitted immediately.
+6. Open Paprika and verify the recipe appears. The prototype reports **Sent to Paprika**, not a confirmed save, until live response semantics are established.
+
+Reopening the popup on the same page in the same tab does not automatically submit it again. To send it again, check Paprika first, then use the explicit retry control. A network timeout never triggers an automatic retry.
+
+Use the extension's **Options** page to view connection status or disconnect without saving a page. A suggested shortcut is **Alt+Shift+P**; Chrome lets you customize it at `chrome://extensions/shortcuts`.
+
+After changing extension files, click **Reload** on its card at `chrome://extensions` and reload any already-open Paprika connection tab.
+
+## Development and checks
+
+Node 24 or later:
+
+```sh
+npm ci
+npm test
+npm run check
+npx playwright install chromium
+npm run test:browser
+```
+
+The runtime has no third-party dependencies. DOM and Chromium dependencies are development-only. The browser test uses a temporary profile, synthetic pages, and intercepted submission responses; it does not use a real account. Its disposable manifest grants access to the fixture recipe host to stand in for a manual toolbar gesture. That permission is absent from the shipped manifest.
+
+See [manual verification](docs/manual-verification.md) for the remaining live checks and [privacy](docs/privacy.md) for the data flow.
 
 ## Intended experience
 

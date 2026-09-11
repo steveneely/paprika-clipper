@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Paprika Clipper</title>
+  <link rel="stylesheet" href="popup.css">
+  <script type="module" src="popup.js"></script>
+</head>
+<body>
+  <main>
+    <header><span class="mark" aria-hidden="true">P</span><span>PAPRIKA CLIPPER</span><span id="connection" class="pill">…</span></header>
+    <section aria-live="polite" aria-atomic="true">
+      <p class="eyebrow" id="eyebrow">YOUR NEXT GOOD MEAL</p>
+      <h1 id="heading">Recipes worth<br>keeping.</h1>
+      <p id="message">Connect your Paprika account to save recipes straight from Chrome.</p>
+    </section>
+    <div class="actions">
+      <button id="connect" hidden>Connect Paprika <span aria-hidden="true">↗</span></button>
+      <button id="retry" hidden>Try again</button>
+      <label id="check-label" hidden><input type="checkbox" id="checked"> I checked Paprika and want to save this page again.</label>
+    </div>
+    <p id="detail" class="detail">Sign in on Paprika’s website. Your password stays there.</p>
+    <footer><span>Paprika handles the recipe.</span><button id="disconnect" class="text-button" hidden>Disconnect</button></footer>
+  </main>
+</body>
+</html>

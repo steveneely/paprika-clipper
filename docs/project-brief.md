@@ -47,11 +47,19 @@ Permission design and exact implementation are provisional until the authenticat
 7. Verify disconnect clears credentials and restart preserves an intentional connection.
 8. Scan source, fixtures, logs, and release files for accidental credential inclusion before pushing.
 
+## Prototype implementation status (2026-09-11)
+
+The Manifest V3 prototype is now in `extension/`. It includes automatic bookmarklet detection, connection validation, credential-restricted storage, bundled page capture, raw-DEFLATE payload encoding, direct HTTPS submission, popup feedback, and explicit retry/disconnect controls.
+
+Nine Node/DOM checks passed. Isolated Chromium integration checks passed with synthetic onboarding pages, a fixture recipe, and intercepted Paprika responses. They verify connection detection, page capture and Unicode encoding, credential isolation, duplicate prevention, uncertain network outcomes, token rejection handling, and disconnect. No real credentials were used or committed.
+
+The prototype intentionally says **Sent to Paprika**, with an instruction to verify the recipe in Paprika. No live save has been confirmed. The automated test uses a temporary fixture host permission rather than a manual toolbar gesture; the shipped extension still uses activeTab for recipe access.
+
 ## Next steps
 
 - Inspect the authenticated bookmarklet page through a user-controlled browser session.
-- Build and validate automatic connection detection.
-- Implement bundled page capture, compression, and submission.
+- Validate automatic connection detection against Paprika's actual authenticated markup.
+- Validate the bundled capture and submission against the live endpoint.
 - Verify one end-to-end save before broadening the UI or preparing store distribution.
 
 ## Other API research
