@@ -11,23 +11,20 @@
   <main>
     <header>
       <img class="mark" src="icons/icon.svg" alt="" width="38" height="38">
-      <div class="brand"><span class="brand-name">Paprika Clipper</span><span class="unofficial">Unofficial Chrome extension</span></div>
+      <div class="brand"><span class="brand-name">Paprika Clipper</span></div>
     </header>
-    <div class="account-row"><span>Paprika account</span><span id="connection" class="connection" role="status">Checking…</span></div>
     <div class="content">
       <section aria-live="polite" aria-atomic="true">
-        <p class="section-label">Save a recipe</p>
-        <h1 id="heading">Connect to Paprika</h1>
-        <p id="message">Connect your Paprika account to save recipes straight from Chrome.</p>
+        <h1 id="heading">Save recipes</h1>
+        <p id="message">Sign in to Paprika to get started.</p>
       </section>
       <div class="actions">
         <button id="connect" hidden>Connect Paprika <span aria-hidden="true">↗</span></button>
         <button id="retry" hidden>Try again</button>
       </div>
-      <p id="detail" class="detail">Sign in on Paprika’s website. Your password stays there.</p>
     </div>
-    <div class="service-row"><span>Paprika handles recipe extraction.</span><button id="disconnect" class="text-button" hidden>Disconnect</button></div>
-    <footer><strong>Independent, third-party extension.</strong><p>Not affiliated with or endorsed by Paprika<br>or Hindsight Labs.</p></footer>
+    <div id="account-row" class="account-row" hidden><span id="connection" class="connection" role="status">Connected</span><button id="disconnect" class="text-button" hidden>Disconnect</button></div>
+    <footer>Unofficial · Not affiliated with Paprika or Hindsight Labs.</footer>
   </main>
 </body>
 </html>

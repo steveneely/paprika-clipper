@@ -1,4 +1,4 @@
-import { canCapture, isBookmarkletPage } from './protocol.js';
+import { canCapture } from './protocol.js';
 
 const el = id => document.getElementById(id);
 const send = message => chrome.runtime.sendMessage(message);
@@ -16,22 +16,24 @@ function render(state) {
   el('disconnect').hidden = !connected;
   el('disconnect').disabled = false;
   el('retry').hidden = true;
-  el('detail').textContent = connected ? 'Your connection is stored only in this Chrome profile.' : 'Sign in on Paprika’s website. Your password stays there.';
+  el('account-row').hidden = !connected;
+  el('message').hidden = false;
   if (!connected) {
-    el('heading').textContent = state.connecting ? 'Finish connecting' : 'Connect to Paprika';
-    el('message').textContent = state.connecting ? 'Sign in on the Paprika tab. We’ll connect automatically when your bookmarklet appears.' : 'Connect your Paprika account to save recipes straight from Chrome.';
+    el('heading').textContent = state.connecting ? 'Finish connecting' : 'Save recipes';
+    el('message').textContent = state.connecting ? 'Finish signing in on the Paprika tab.' : 'Sign in to Paprika to get started.';
     el('connect').textContent = state.connecting ? 'Return to Paprika ↗' : 'Connect Paprika ↗';
     return;
   }
   if (settings || !canCapture(tab?.url)) {
     el('heading').textContent = 'Ready to save recipes';
-    el('message').textContent = isBookmarkletPage(tab?.url) ? 'You’re connected. Open a recipe webpage and click the Paprika Clipper toolbar button.' : 'Open a recipe webpage, then click the toolbar button to save it to Paprika.';
+    el('message').textContent = 'Open a recipe and click the scissors to save it.';
     return;
   }
   const save = state.save?.url === tab.url ? state.save : null;
   const titles = { capturing: 'Preparing your page.', sending: 'Sending to Paprika…', submitted: 'Sent to Paprika.', uncertain: 'Check your recipes.', error: 'Unable to save this page', reconnect: 'Reconnect Paprika.' };
   el('heading').textContent = titles[save?.kind] || 'Preparing your page.';
-  el('message').textContent = save?.message || 'Getting this recipe page ready for Paprika…';
+  el('message').textContent = save?.kind === 'submitted' ? 'Check Paprika to confirm it was saved.' : save?.kind === 'uncertain' ? 'The recipe may have saved. Check Paprika.' : save?.message || '';
+  el('message').hidden = !save || ['capturing', 'sending'].includes(save.kind);
   const saving = !save || ['capturing', 'sending'].includes(save.kind);
   el('disconnect').disabled = saving;
   if (save?.kind === 'reconnect') {
@@ -50,6 +52,7 @@ async function refresh() {
   return state;
 }
 function failure() {
+  el('message').hidden = false;
   el('heading').textContent = 'Something went wrong.';
   el('message').textContent = 'Close and reopen the extension to try again.';
 }
@@ -75,7 +78,7 @@ el('connect').addEventListener('click', async () => {
 el('disconnect').addEventListener('click', async () => {
   try {
     const result = await send({ type: 'DISCONNECT' });
-    if (result.error) { el('detail').textContent = result.error; return; }
+    if (result.error) { el('message').hidden = false; el('message').textContent = result.error; return; }
     await refresh();
   } catch { failure(); }
 });
