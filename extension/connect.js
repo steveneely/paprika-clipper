@@ -10,16 +10,22 @@
   const showConnected = () => {
     const notice = document.createElement('div');
     notice.setAttribute('role', 'status');
+    const check = document.createElement('div');
+    check.textContent = '✓';
+    check.setAttribute('aria-hidden', 'true');
+    check.style.cssText = 'display:grid;place-items:center;width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:#b43e35;color:#fff4df;font:700 34px/1 system-ui,sans-serif;';
     const title = document.createElement('strong');
     title.textContent = 'Paprika Clipper connected';
+    title.style.cssText = 'display:block;font-size:28px;font-weight:700;line-height:1.2;color:#343138;';
     const next = document.createElement('div');
+    next.style.cssText = 'margin-top:16px;font-size:20px;font-weight:600;line-height:1.4;color:#b43e35;';
     let seconds = 3;
     next.textContent = 'Closing this tab in 3 seconds…';
     const attribution = document.createElement('div');
     attribution.textContent = 'Unofficial, third-party extension. Not affiliated with Paprika or Hindsight Labs.';
-    attribution.style.cssText = 'font-size:12px;margin-top:8px;';
-    notice.append(title, next, attribution);
-    notice.style.cssText = 'position:fixed;bottom:24px;left:24px;right:24px;z-index:2147483647;padding:20px;border:1px solid #ddd;border-top:3px solid #b43e35;border-radius:4px;background:#fff;color:#333;font:14px/1.428571429 "Helvetica Neue",Helvetica,Arial,sans-serif;box-shadow:0 1px 3px #0003;';
+    attribution.style.cssText = 'font-size:12px;line-height:1.5;margin-top:24px;color:#666;';
+    notice.append(check, title, next, attribution);
+    notice.style.cssText = 'box-sizing:border-box;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:420px;max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);overflow:auto;z-index:2147483647;padding:32px 24px;border:1px solid #e5ddd8;border-top:5px solid #b43e35;border-radius:16px;background:#fff;text-align:center;color:#333;font:14px/1.5 system-ui,sans-serif;box-shadow:0 16px 64px #0004,0 0 0 100vmax #0006;';
     document.body.append(notice);
     const countdown = setInterval(async () => {
       seconds -= 1;

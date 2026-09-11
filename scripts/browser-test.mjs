@@ -78,6 +78,7 @@ try {
     document.body.append(link);
   });
   await connectPage.getByRole('status').filter({ hasText: 'Closing this tab in 3 seconds' }).waitFor();
+  await connectPage.screenshot({ path: 'work/screenshots/connected-countdown.png' });
   const countdownStarted = Date.now();
   // Reproduce a close request arriving before the worker's deadline.
   await worker.evaluate(async () => {
