@@ -18,7 +18,7 @@
     attribution.textContent = 'Unofficial, third-party extension. Not affiliated with Paprika or Hindsight Labs.';
     attribution.style.cssText = 'font-size:12px;margin-top:8px;';
     notice.append(title, next, attribution);
-    notice.style.cssText = 'position:fixed;bottom:24px;left:24px;right:24px;z-index:2147483647;padding:18px 22px;border-radius:9px;background:#d90824;color:white;font:14px/1.5 system-ui;box-shadow:0 6px 30px #0003;';
+    notice.style.cssText = 'position:fixed;bottom:24px;left:24px;right:24px;z-index:2147483647;padding:20px;border:1px solid #ddd;border-top:3px solid #d10505;border-radius:4px;background:#fff;color:#333;font:14px/1.428571429 "Helvetica Neue",Helvetica,Arial,sans-serif;box-shadow:0 1px 3px #0003;';
     document.body.append(notice);
   };
   async function scan() {

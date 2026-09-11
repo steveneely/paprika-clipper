@@ -6,7 +6,7 @@ An independent, unofficial Chrome extension for saving webpages to Paprika Recip
 
 The unpacked Chrome prototype is implemented, and the user reported the initial live flow working. Automated tests cover synthetic onboarding, page capture, payload encoding, token isolation, and save/error states. Exact live response semantics and recipe-field completeness have not been independently verified.
 
-Version 0.1.1 uses Paprika-inspired red accents, system typography, and white/gray panels, with a distinct clipboard icon. The popup, extension listing, toolbar tooltip, and connection notice all identify it as unofficial.
+Version 0.1.2 uses font roles and style values from Paprika's published CSS: locally installed Futura for branding, bundled Montserrat at weight 400 for headings, Helvetica Neue/Helvetica/Arial for body text, brand red `#d10505`, and light Bootstrap-style panels with 4 px control corners. Futura falls back to Montserrat on systems where it is unavailable. The original clipboard icon, popup, extension listing, toolbar tooltip, and connection notice identify the extension as unofficial.
 
 ## Try it in Chrome
 
@@ -35,7 +35,7 @@ npx playwright install chromium
 npm run test:browser
 ```
 
-The runtime has no third-party dependencies. DOM and Chromium dependencies are development-only. The browser test uses a temporary profile, synthetic pages, and intercepted submission responses; it does not use a real account. Its disposable manifest grants access to the fixture recipe host to stand in for a manual toolbar gesture. That permission is absent from the shipped manifest.
+The runtime has no third-party JavaScript dependencies. Montserrat is bundled with its SIL Open Font License; no external font service is contacted. DOM and Chromium dependencies are development-only. The browser test uses a temporary profile, synthetic pages, and intercepted submission responses; it does not use a real account. Its disposable manifest grants access to the fixture recipe host to stand in for a manual toolbar gesture. That permission is absent from the shipped manifest.
 
 See [manual verification](docs/manual-verification.md) for the remaining live checks and [privacy](docs/privacy.md) for the data flow.
 

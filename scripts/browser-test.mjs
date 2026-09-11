@@ -50,7 +50,18 @@ try {
   await settings.getByRole('button', { name: /Connect Paprika/ }).waitFor();
   await mkdir('work/screenshots', { recursive: true });
   await settings.setViewportSize({ width: 376, height: 445 });
+  await settings.evaluate(() => document.fonts.ready);
   await settings.locator('main').screenshot({ path: 'work/screenshots/disconnected.png' });
+  const fontSession = await context.newCDPSession(settings);
+  await fontSession.send('DOM.enable');
+  await fontSession.send('CSS.enable');
+  const { root } = await fontSession.send('DOM.getDocument');
+  for (const selector of ['.brand-name', '#heading', '#message']) {
+    const { nodeId } = await fontSession.send('DOM.querySelector', { nodeId: root.nodeId, selector });
+    const { fonts } = await fontSession.send('CSS.getPlatformFontsForNode', { nodeId });
+    console.log(`Rendered font ${selector}: ${fonts.map(font => font.familyName).join(', ')}`);
+  }
+  await fontSession.detach();
   const newPage = context.waitForEvent('page');
   await settings.getByRole('button', { name: /Connect Paprika/ }).click();
   const connectPage = await newPage;
@@ -96,6 +107,7 @@ try {
   assert.equal(denied, true);
   console.log('PASS real page capture, layout, Unicode payload, and credential isolation');
   await popup.setViewportSize({ width: 376, height: 520 });
+  await popup.evaluate(() => document.fonts.ready);
   await popup.locator('main').screenshot({ path: 'work/screenshots/submitted.png' });
   await popup.reload();
   await popup.getByRole('heading', { name: 'Sent to Paprika.' }).waitFor();
