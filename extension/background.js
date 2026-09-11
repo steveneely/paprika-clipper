@@ -19,11 +19,9 @@ const trustedUI = sender => sender.id === chrome.runtime.id &&
 async function setStatus(tabId, status) {
   const state = { ...status, updatedAt: Date.now() };
   await chrome.storage.session.set({ [statusKey(tabId)]: state });
-  const badges = { capturing: '…', sending: '…', submitted: 'SENT', uncertain: '?', error: '!', reconnect: '!' };
   await Promise.allSettled([
-    chrome.action.setBadgeText({ tabId, text: badges[state.kind] || '' }),
-    chrome.action.setBadgeBackgroundColor({ tabId, color: '#b43e35' }),
-    chrome.action.setTitle({ tabId, title: `Paprika Clipper (Unofficial): ${state.message}` })
+    chrome.action.setBadgeText({ tabId, text: '' }),
+    chrome.action.setTitle({ tabId, title: 'Paprika Clipper (Unofficial)' })
   ]);
   return state;
 }

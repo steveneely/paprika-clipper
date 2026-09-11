@@ -6,7 +6,7 @@ An independent, unofficial Chrome extension for saving webpages to Paprika Recip
 
 The unpacked Chrome prototype is implemented, and the user reported the initial live flow working. Automated tests cover synthetic onboarding, page capture, payload encoding, token isolation, and save/error states. Exact live response semantics and recipe-field completeness have not been independently verified.
 
-Version 0.1.3 uses system fonts only: Avenir Next / Segoe UI / Arial for headings and the platform UI font for body text. There are no bundled or remotely loaded fonts. The original clipboard icon, muted red accent, dark title, and rounded controls give the extension its own identity. The popup, extension listing, toolbar tooltip, and connection notice clearly identify it as unofficial.
+Version 0.1.3 uses system fonts only: Avenir Next / Segoe UI / Arial for headings and the platform UI font for body text. There are no bundled or remotely loaded fonts. The original cream recipe-card icon, muted red accent, dark title, and rounded controls give the extension its own identity. The popup, extension listing, toolbar tooltip, and connection notice clearly identify it as unofficial.
 
 ## Try it in Chrome
 
