@@ -77,7 +77,12 @@ try {
     link.textContent = 'Save recipe';
     document.body.append(link);
   });
+  await connectPage.getByRole('status').filter({ hasText: 'Closing this tab in 3 seconds' }).waitFor();
+  const countdownStarted = Date.now();
+  await connectPage.getByRole('status').filter({ hasText: 'Closing this tab in 2 seconds' }).waitFor();
+  await connectPage.getByRole('status').filter({ hasText: 'Closing this tab in 1 second' }).waitFor();
   await connectionClosed;
+  assert.ok(Date.now() - countdownStarted >= 2700);
   assert.equal(unrelatedPaprika.isClosed(), false);
   assert.equal(await worker.evaluate(async () => (await chrome.storage.local.get('token')).token), '0123456789abcdef');
   console.log('PASS connection stores the token and closes only its own login tab');

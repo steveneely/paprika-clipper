@@ -59,12 +59,27 @@ async function acceptToken(message, sender) {
   // A freshly connected account must not inherit another account's save history.
   const all = await chrome.storage.session.get(null);
   await chrome.storage.session.remove(Object.keys(all).filter(key => key.startsWith('save:')));
-  // Close only our connection tab, after the credential and cleanup are saved.
-  try {
-    const tab = await chrome.tabs.get(pending.tabId);
-    if (isBookmarkletPage(tab.url) && !tab.pendingUrl) await chrome.tabs.remove(tab.id);
-  } catch { /* Connection succeeded; the page notice is a fallback if closing fails. */ }
+  await chrome.storage.session.set({ [`close:${pending.tabId}`]: {
+    tabId: pending.tabId, documentId: sender.documentId,
+    closeAfter: Date.now() + 3000, expiresAt: Date.now() + 60000
+  } });
   return { connected: true };
+}
+
+async function closeConnection(sender) {
+  const key = `close:${sender.tab?.id}`;
+  const closing = (await chrome.storage.session.get(key))[key];
+  if (!validConnectionSender(sender, closing) || closing.documentId !== sender.documentId ||
+      Date.now() < closing.closeAfter) return { closed: false };
+  await chrome.storage.session.remove(key);
+  try {
+    const tab = await chrome.tabs.get(closing.tabId);
+    if (isBookmarkletPage(tab.url) && !tab.pendingUrl) {
+      await chrome.tabs.remove(tab.id);
+      return { closed: true };
+    }
+  } catch { /* The content script can show a manual-close fallback. */ }
+  return { closed: false };
 }
 
 async function performSave(tabId, expectedUrl) {
@@ -122,6 +137,7 @@ async function handle(message, sender) {
     return validConnectionSender(sender, pending) ? { eligible: true, expiresAt: pending.expiresAt } : { eligible: false };
   }
   if (message?.type === 'CONNECT_TOKEN') return serialize(() => acceptToken(message, sender));
+  if (message?.type === 'CLOSE_CONNECTION') return serialize(() => closeConnection(sender));
   if (!trustedUI(sender)) return { error: 'Unavailable.' };
   switch (message?.type) {
     case 'STATE': return state(message.tabId);
@@ -147,6 +163,6 @@ chrome.tabs.onRemoved.addListener(tabId => {
     await ready;
     const { pending } = await chrome.storage.session.get('pending');
     if (pending?.tabId === tabId) await chrome.storage.session.remove('pending');
-    await chrome.storage.session.remove(statusKey(tabId));
+    await chrome.storage.session.remove([statusKey(tabId), `close:${tabId}`]);
   }).catch(() => {});
 });

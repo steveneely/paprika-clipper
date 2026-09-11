@@ -13,13 +13,29 @@
     const title = document.createElement('strong');
     title.textContent = 'Paprika Clipper connected';
     const next = document.createElement('div');
-    next.textContent = 'You can close this tab and save a recipe with the extension.';
+    let seconds = 3;
+    next.textContent = 'Closing this tab in 3 seconds…';
     const attribution = document.createElement('div');
     attribution.textContent = 'Unofficial, third-party extension. Not affiliated with Paprika or Hindsight Labs.';
     attribution.style.cssText = 'font-size:12px;margin-top:8px;';
     notice.append(title, next, attribution);
     notice.style.cssText = 'position:fixed;bottom:24px;left:24px;right:24px;z-index:2147483647;padding:20px;border:1px solid #ddd;border-top:3px solid #b43e35;border-radius:4px;background:#fff;color:#333;font:14px/1.428571429 "Helvetica Neue",Helvetica,Arial,sans-serif;box-shadow:0 1px 3px #0003;';
     document.body.append(notice);
+    const countdown = setInterval(async () => {
+      seconds -= 1;
+      if (seconds > 0) {
+        next.textContent = `Closing this tab in ${seconds} ${seconds === 1 ? 'second' : 'seconds'}…`;
+        return;
+      }
+      clearInterval(countdown);
+      next.textContent = 'Closing this tab…';
+      try {
+        const result = await chrome.runtime.sendMessage({ type: 'CLOSE_CONNECTION' });
+        if (result?.closed) return;
+      } catch { /* Closing the tab can end the message channel. */ }
+      next.textContent = 'You’re connected. You can close this tab.';
+    }, 1000);
+    window.addEventListener('pagehide', () => clearInterval(countdown), { once: true });
   };
   async function scan() {
     if (sending) return;

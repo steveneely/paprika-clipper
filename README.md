@@ -13,7 +13,7 @@ Version 0.1.3 uses system fonts only: Avenir Next / Segoe UI / Arial for heading
 1. Open `chrome://extensions` and enable **Developer mode**.
 2. Choose **Load unpacked** and select this repository's `extension` folder (on the development machine: `/Users/sneely/code/paprika-clipper/extension`). No build or Node installation is needed to load it.
 3. Pin **Paprika Clipper** using Chrome's extensions menu.
-4. Click its toolbar icon, then **Connect Paprika**. Sign in on the Paprika tab; the extension connects automatically and closes the tab it opened.
+4. Click its toolbar icon, then **Connect Paprika**. Sign in on the Paprika tab; the extension connects automatically and shows a three-second success countdown, then closes the tab it opened.
 5. Open a recipe webpage and click the toolbar icon again. The page will be captured and submitted immediately.
 6. Open Paprika and verify the recipe appears. The prototype reports **Sent to Paprika**, not a confirmed save, until live response semantics are established.
 
