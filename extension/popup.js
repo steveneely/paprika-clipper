@@ -17,11 +17,12 @@ function render(state) {
   el('disconnect').hidden = !connected;
   el('disconnect').disabled = false;
   el('retry').hidden = true;
+  el('signin-note').hidden = connected;
   el('account-row').hidden = !connected;
   el('message').hidden = false;
   if (!connected) {
     el('heading').textContent = state.connecting ? 'Finish connecting' : '';
-    el('message').textContent = state.connecting ? 'Finish signing in on the Paprika tab.' : 'Sign in to Paprika to get started.';
+    el('message').textContent = state.connecting ? 'Finish signing in on the Paprika tab.' : 'Sign in on Paprika’s website.';
     el('connect').textContent = state.connecting ? 'Return to Paprika ↗' : 'Connect Paprika ↗';
     return;
   }
@@ -40,6 +41,7 @@ function render(state) {
   if (save?.kind === 'reconnect') {
     el('connect').hidden = false;
     el('connect').textContent = 'Reconnect Paprika ↗';
+    el('signin-note').hidden = false;
   } else if (save?.kind === 'error') {
     el('retry').hidden = false;
     el('retry').disabled = busy;

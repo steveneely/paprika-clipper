@@ -16,12 +16,13 @@
     <div class="content">
       <section aria-live="polite" aria-atomic="true">
         <h1 id="heading" hidden></h1>
-        <p id="message">Sign in to Paprika to get started.</p>
+        <p id="message">Sign in on Paprika’s website.</p>
       </section>
       <div class="actions">
-        <button id="connect" hidden>Connect Paprika <span aria-hidden="true">↗</span></button>
+        <button id="connect" aria-describedby="signin-note" hidden>Connect Paprika <span aria-hidden="true">↗</span></button>
         <button id="retry" hidden>Try again</button>
       </div>
+      <p id="signin-note">We never see your password. Your connection token is stored in this browser.</p>
     </div>
     <div id="account-row" class="account-row" hidden><span id="connection" class="connection" role="status">Connected</span><button id="disconnect" class="text-button" hidden>Disconnect</button></div>
     <footer>Unofficial · Not affiliated with Paprika or Hindsight Labs.</footer>
