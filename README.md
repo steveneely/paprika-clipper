@@ -1,31 +1,44 @@
 # Paprika Recipe Clipper
 
-An independent, unofficial Chrome extension for saving webpages to Paprika Recipe Manager, with recipe extraction and saving handled entirely by Paprika. Not affiliated with or endorsed by Paprika or Hindsight Labs.
+Save recipe webpages to your Paprika account from Chrome. Connect once through Paprika’s website, then click the scissors on a recipe page. Paprika handles recipe extraction and saving.
 
-## Status
+An independent extension, not affiliated with or endorsed by Paprika or Hindsight Labs. A Paprika account is required.
 
-The unpacked Chrome prototype is implemented, and the user reported the initial live flow working. Automated tests cover synthetic onboarding, page capture, payload encoding, token isolation, and save/error states. Exact live response semantics and recipe-field completeness have not been independently verified.
+## Install
 
-Version 0.1.3 uses system fonts only: Avenir Next / Segoe UI / Arial for headings and the platform UI font for body text. There are no bundled or remotely loaded fonts. The original cream scissors icon, muted red accent, dark title, and rounded controls give the extension its own identity. The popup, extension listing, toolbar tooltip, and connection notice clearly identify it as unofficial.
+The first Chrome Web Store release is being prepared. Until the store listing is available:
 
-## Try it in Chrome
+1. Download this repository and open `chrome://extensions` in Chrome 120 or later.
+2. Enable **Developer mode**, choose **Load unpacked**, and select the `extension` folder.
+3. Pin **Paprika Recipe Clipper** in Chrome’s extensions menu.
+4. Click **Connect Paprika** and sign in on Paprika’s website. A success message counts down for three seconds, then closes the connection tab.
+5. Open a recipe webpage and click the scissors to send it to Paprika.
 
-1. Open `chrome://extensions` and enable **Developer mode**.
-2. Choose **Load unpacked** and select this repository's `extension` folder (on the development machine: `/Users/sneely/code/paprika-clipper/extension`). No build or Node installation is needed to load it.
-3. Pin **Paprika Recipe Clipper** using Chrome's extensions menu.
-4. Click its toolbar icon, then **Connect Paprika**. Sign in on the Paprika tab; the extension connects automatically and shows a three-second success countdown, then closes the tab it opened.
-5. Open a recipe webpage and click the toolbar icon again. The page will be captured and submitted immediately.
-6. Open Paprika and verify the recipe appears. The prototype reports **Sent to Paprika**, not a confirmed save, until live response semantics are established.
+The suggested shortcut is **Alt+Shift+P**, customizable at `chrome://extensions/shortcuts`. Use the extension’s **Options** page to manage the connection without sending a page.
 
-Reopening the popup on the same page in the same tab does not automatically submit it again. Submitted pages and uncertain outcomes have no save-again control. Retry is offered only after a definite failure. A network timeout never triggers an automatic retry. This guard tracks the current page in each tab during the browser session; it does not check the Paprika library or deduplicate across tabs or browser restarts.
+After updating unpacked files, reload the extension in `chrome://extensions`. Start a fresh connection tab when testing onboarding changes.
 
-Use the extension's **Options** page to view connection status or disconnect without saving a page. A suggested shortcut is **Alt+Shift+P**; Chrome lets you customize it at `chrome://extensions/shortcuts`.
+## Privacy
 
-After changing extension files, click **Reload** on its card at `chrome://extensions` and reload any already-open Paprika connection tab.
+- Sign in directly on Paprika’s site. The extension does not collect your password.
+- Your connection token is stored in this Chrome profile, not synced between devices.
+- Clicking the extension on a recipe page sends that page’s URL, HTML, and layout information directly to Paprika over HTTPS. Page content outside the recipe can be included.
+- No project-operated server, analytics, advertising, remote code, or bundled/remote fonts.
+- Disconnect clears the locally stored token and session state.
 
-## Development and checks
+Read the [privacy policy](docs/privacy.md) for data handling and permissions.
 
-Node 24 or later:
+## Behavior and limitations
+
+The popup reports **Sent to Paprika** after submission. It does not inspect your recipe library or promise that every recipe field was extracted correctly. Paprika controls extraction and storage.
+
+Reopening the popup on the same page in the same tab does not send another copy. Submitted pages and uncertain outcomes have no save-again control. Retry is offered for definite failures. This guard covers the current page in each tab during the browser session; it does not deduplicate across tabs, restarts, or your existing Paprika library.
+
+The extension uses Paprika’s undocumented bookmarklet protocol. Changes to that service can affect compatibility. HTML pages up to 20,000 elements and a 20 MiB capture payload are supported.
+
+## Development
+
+The extension loads directly from `extension/`; no build is required. Development uses Node 24 or later and Python 3 for packaging.
 
 ```sh
 npm ci
@@ -33,36 +46,15 @@ npm test
 npm run check
 npx playwright install chromium
 npm run test:browser
+npm run package
 ```
 
-The runtime has no third-party JavaScript dependencies or font files, and no external font service is contacted. DOM and Chromium dependencies are development-only. The browser test uses a temporary profile, synthetic pages, and intercepted submission responses; it does not use a real account. Its disposable manifest grants access to the fixture recipe host to stand in for a manual toolbar gesture. That permission is absent from the shipped manifest.
+Browser tests use an isolated profile, synthetic credentials, example pages, and intercepted Paprika responses. They exercise onboarding, countdown closure, page capture, Unicode encoding, token isolation, duplicate prevention, and error handling without writing to a real account. Live use has been reported working by the project owner; automated fixtures do not independently verify Paprika’s current service or saved recipe fields.
 
-See [manual verification](docs/manual-verification.md) for the remaining live checks and [privacy](docs/privacy.md) for the data flow.
+`npm run package` creates a deterministic ZIP in `dist/` with only the extension runtime. `npm run assets` renders store artwork using screenshots from `npm run test:browser`.
 
-## Intended experience
+See [manual verification](docs/manual-verification.md), [store submission notes](docs/store-listing.md), and the [project brief](docs/project-brief.md).
 
-1. Click **Connect Paprika** in the extension.
-2. Log in on Paprika's own bookmarklet page, if needed.
-3. The extension detects the generated bookmarklet, stores its token locally, and closes its connection tab.
-4. Click the toolbar button on a recipe page to send that page to Paprika for extraction and saving.
+## Support
 
-The normal onboarding flow should require no copying code or editing settings. Automatic bookmarklet detection still needs to be verified on the authenticated page.
-
-## Design constraints
-
-- Paprika performs all recipe extraction. Do not implement a recipe parser, AI extraction, or structured-data extraction.
-- Users sign in on Paprika's website. The extension does not collect their passwords.
-- Each user supplies their own account connection; no credentials are shipped in the repository.
-- Send page data directly to Paprika, without a project-operated backend.
-- Access recipe pages only when the user invokes the extension.
-- Bundle executable extension code locally for Manifest V3.
-
-See [the project brief](docs/project-brief.md) for technical findings, unresolved questions, and prototype acceptance criteria.
-
-## References
-
-- [Paprika bookmarklet](https://www.paprikaapp.com/bookmarklet/)
-- [Paprika bookmarklet script, without an account token](https://www.paprikaapp.com/bookmarklet/v1)
-- [Chrome extension documentation](https://developer.chrome.com/docs/extensions/)
-
-This project is not affiliated with or endorsed by Paprika or Hindsight Labs.
+[Open an issue](https://github.com/steveneely/paprika-clipper/issues) for bugs or suggestions. Never include passwords, bookmarklet tokens, personal bookmarklet code, or authenticated page captures in a public issue.

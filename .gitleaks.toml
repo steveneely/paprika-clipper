@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Exact synthetic bookmarklet token used only in test fixtures"
+condition = "AND"
+paths = ['''^(test/.*|scripts/browser-test\.mjs)$''']
+regexTarget = "secret"
+regexes = ['''^0123456789abcdef$''']

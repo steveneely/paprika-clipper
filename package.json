@@ -1,12 +1,14 @@
 {
   "name": "paprika-clipper",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test test/*.test.js",
     "test:browser": "node scripts/browser-test.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "package": "python3 scripts/package-release.py",
+    "assets": "node scripts/store-assets.mjs"
   },
   "engines": {
     "node": ">=24"

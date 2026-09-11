@@ -6,7 +6,7 @@ Build a Chrome extension usable by anyone with a Paprika account. Prioritize min
 
 The selected approach is automatic bookmarklet connection. The user signs in on https://www.paprikaapp.com/bookmarklet/ and the extension detects the generated JavaScript bookmarklet and extracts its account token. The token remains in extension-local storage and is used only to communicate with Paprika.
 
-The initial GitHub repository is private while prototyping. Publication and distribution details remain undecided.
+The user authorized making the GitHub repository public and preparing a Chrome Web Store release on 2026-09-11. Store publication remains subject to account setup and Google review.
 
 ## Findings from Paprika's public script
 

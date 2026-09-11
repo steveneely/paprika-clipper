@@ -15,7 +15,7 @@ const manifest = JSON.parse(await readFile(path.join(extension, 'manifest.json')
 manifest.host_permissions.push('https://recipe.example/*');
 await writeFile(path.join(extension, 'manifest.json'), JSON.stringify(manifest));
 const context = await chromium.launchPersistentContext(path.join(temp, 'profile'), {
-  channel: 'chromium', headless: true,
+  channel: 'chromium', headless: true, deviceScaleFactor: 2,
   args: [`--disable-extensions-except=${extension}`, `--load-extension=${extension}`]
 });
 context.setDefaultTimeout(10000);

@@ -1,4 +1,6 @@
-# Prototype privacy and permissions
+# Privacy policy — Paprika Recipe Clipper
+
+Effective date: September 11, 2026.
 
 Paprika Recipe Clipper is an independent extension. It does not operate a backend or use analytics.
 
@@ -24,3 +26,11 @@ Only Paprika controls how submitted information is processed and retained: https
 - `https://www.paprikaapp.com/*`: connects to the bookmarklet endpoint and enables the narrowly matched onboarding content script. Chrome's host permission applies to the origin; the content script itself matches only the bookmarklet page.
 
 No browsing-history, cookies, password-manager, or permanent all-sites permission is requested. Normal webpage content can include personal information; save only pages you intend to send to Paprika.
+
+## Use and sharing
+
+Data is used only to connect to the account you choose and send the webpages you explicitly select to Paprika. The developer does not receive your page captures or connection token, sell user data, use it for advertising, or use it to determine creditworthiness or lending eligibility. Transfers to Paprika are necessary to provide the extension’s recipe-saving function. The extension does not use this data for unrelated purposes.
+
+## Contact
+
+For privacy questions, contact the maintainer through the [project’s issue tracker](https://github.com/steveneely/paprika-clipper/issues). Do not post credentials, personal recipe data, or authenticated captures in a public issue. For security vulnerabilities, use GitHub’s private vulnerability reporting for this repository when available.
