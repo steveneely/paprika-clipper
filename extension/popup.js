@@ -34,8 +34,8 @@ function render(state) {
   const save = state.save?.url === tab.url ? state.save : null;
   const titles = { capturing: 'Preparing your page.', sending: 'Sending to Paprika…', submitted: 'Sent to Paprika.', uncertain: 'Check your recipes.', error: 'Unable to save this page', reconnect: 'Reconnect Paprika.' };
   el('heading').textContent = titles[save?.kind] || 'Preparing your page.';
-  el('message').textContent = save?.kind === 'submitted' ? 'Check Paprika to confirm it was saved.' : save?.kind === 'uncertain' ? 'The recipe may have saved. Check Paprika.' : save?.message || '';
-  el('message').hidden = !save || ['capturing', 'sending'].includes(save.kind);
+  el('message').textContent = save?.kind === 'submitted' ? '' : save?.kind === 'uncertain' ? 'The recipe may have saved. Check Paprika.' : save?.message || '';
+  el('message').hidden = !save || ['capturing', 'sending', 'submitted'].includes(save.kind);
   const saving = !save || ['capturing', 'sending'].includes(save.kind);
   el('disconnect').disabled = saving;
   if (save?.kind === 'reconnect') {
