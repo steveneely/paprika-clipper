@@ -2,15 +2,17 @@
 
 Release package: `dist/paprika-recipe-clipper-1.0.0.zip`.
 
-Status: prepared locally; no store item has been submitted or approved yet.
+Status: uploaded to Chrome Web Store as a draft on September 11, 2026. Listing assets, privacy declarations, and test instructions are saved. Dedicated reviewer account access is still needed before submission. The item has not been submitted or approved.
+
+Store item ID: `bdlhgjkkjeohmmfcfpmpdjnffhkoajgn`. Repository visibility: public.
 
 ## Listing fields
 
 **Name:** Paprika Recipe Clipper (Unofficial)
 
-**Summary:** Send recipe pages to your Paprika account with one click. Independent extension; Paprika handles recipe extraction.
+**Summary from package:** Independent, unofficial extension for saving recipe pages to Paprika. Not affiliated with Paprika or Hindsight Labs.
 
-**Suggested category:** Tools (choose the closest available category in the dashboard).
+**Category:** Lifestyle → Household.
 
 **Language:** English
 
