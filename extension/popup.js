@@ -10,6 +10,7 @@ let polling;
 
 function render(state) {
   const connected = state.connected;
+  el('heading').hidden = !connected && !state.connecting;
   el('connection').textContent = connected ? 'Connected' : 'Not connected';
   el('connection').dataset.connected = String(Boolean(connected));
   el('connect').hidden = connected;
@@ -19,7 +20,7 @@ function render(state) {
   el('account-row').hidden = !connected;
   el('message').hidden = false;
   if (!connected) {
-    el('heading').textContent = state.connecting ? 'Finish connecting' : 'Save recipes';
+    el('heading').textContent = state.connecting ? 'Finish connecting' : '';
     el('message').textContent = state.connecting ? 'Finish signing in on the Paprika tab.' : 'Sign in to Paprika to get started.';
     el('connect').textContent = state.connecting ? 'Return to Paprika ↗' : 'Connect Paprika ↗';
     return;
@@ -53,6 +54,7 @@ async function refresh() {
 }
 function failure() {
   el('message').hidden = false;
+  el('heading').hidden = false;
   el('heading').textContent = 'Something went wrong.';
   el('message').textContent = 'Close and reopen the extension to try again.';
 }

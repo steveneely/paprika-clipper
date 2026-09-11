@@ -24,6 +24,7 @@ header { display: flex; align-items: center; gap: 9px; padding: 12px 14px; backg
 .content { padding: 14px; }
 h1 { margin: 0; font-family: 'Avenir Next', 'Segoe UI', Arial, sans-serif; font-size: 20px; line-height: 1.1; font-weight: 400; }
 #message { margin: 6px 0 0; color: var(--secondary); font-size: 14px; line-height: 1.428571429; }
+#heading[hidden] + #message { margin-top: 0; }
 .actions { display: grid; gap: 8px; margin-top: 12px; }
 .actions:not(:has(> :not([hidden]))) { margin-top: 0; }
 button { font: inherit; cursor: pointer; }
