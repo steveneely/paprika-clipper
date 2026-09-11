@@ -21,7 +21,7 @@ async function setStatus(tabId, status) {
   await chrome.storage.session.set({ [statusKey(tabId)]: state });
   await Promise.allSettled([
     chrome.action.setBadgeText({ tabId, text: '' }),
-    chrome.action.setTitle({ tabId, title: 'Paprika Clipper (Unofficial)' })
+    chrome.action.setTitle({ tabId, title: 'Paprika Recipe Clipper (Unofficial)' })
   ]);
   return state;
 }

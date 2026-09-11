@@ -15,7 +15,7 @@
     check.setAttribute('aria-hidden', 'true');
     check.style.cssText = 'display:grid;place-items:center;width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:#b43e35;color:#fff4df;font:700 34px/1 system-ui,sans-serif;';
     const title = document.createElement('strong');
-    title.textContent = 'Paprika Clipper connected';
+    title.textContent = 'Paprika Recipe Clipper connected';
     title.style.cssText = 'display:block;font-size:28px;font-weight:700;line-height:1.2;color:#343138;';
     const next = document.createElement('div');
     next.style.cssText = 'margin-top:16px;font-size:20px;font-weight:600;line-height:1.4;color:#b43e35;';

@@ -1,6 +1,6 @@
 # Prototype privacy and permissions
 
-Paprika Clipper is an independent extension. It does not operate a backend or use analytics.
+Paprika Recipe Clipper is an independent extension. It does not operate a backend or use analytics.
 
 ## Account connection
 
