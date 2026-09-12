@@ -30,11 +30,7 @@ Read the [privacy policy](docs/privacy.md) for data handling and permissions.
 
 ## Behavior and limitations
 
-The popup reports **Sent to Paprika** after submission. It does not inspect your recipe library or promise that every recipe field was extracted correctly. Paprika controls extraction and storage.
-
-Reopening the popup on the same page in the same tab does not send another copy. Submitted pages and uncertain outcomes have no save-again control. Retry is offered for definite failures. This guard covers the current page in each tab during the browser session; it does not deduplicate across tabs, restarts, or your existing Paprika library.
-
-The extension uses Paprika’s undocumented bookmarklet protocol. Changes to that service can affect compatibility. HTML pages up to 20,000 elements and a 20 MiB capture payload are supported.
+Paprika controls extraction and storage. The extension uses Paprika’s undocumented bookmarklet protocol. Changes to that service can affect compatibility.
 
 ## Development
 
