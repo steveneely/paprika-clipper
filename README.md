@@ -58,3 +58,7 @@ See [manual verification](docs/manual-verification.md), [store submission notes]
 ## Support
 
 [Open an issue](https://github.com/steveneely/paprika-clipper/issues) for bugs or suggestions. Never include passwords, bookmarklet tokens, personal bookmarklet code, or authenticated page captures in a public issue.
+
+## License
+
+[MIT](LICENSE) © 2026 Steve Neely.
