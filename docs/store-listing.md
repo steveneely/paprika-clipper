@@ -1,6 +1,6 @@
 # Chrome Web Store submission
 
-Release package: `dist/paprika-recipe-clipper-1.0.0.zip`.
+Release package: `dist/paprika-recipe-clipper-1.0.1.zip`.
 
 Status: uploaded to Chrome Web Store as a draft on September 11, 2026. Listing assets, privacy declarations, and test instructions are saved. Dedicated reviewer account access is still needed before submission. The item has not been submitted or approved.
 
@@ -76,6 +76,8 @@ Run `npm run test:browser`, then `npm run assets`.
 - `store-assets/screenshot-sent.png`: 1280×800, actual extension submission UI in a listing composition.
 - `store-assets/promo-small.png`: 440×280, original scissors/recipe artwork.
 - `extension/icons/icon-128.png`: 128×128 PNG, including store-recommended transparent padding.
+
+The release ZIP includes the project’s MIT license and copyright notice.
 
 All captures use synthetic fixtures and contain no real account data. The promotional artwork is original. Font files and Paprika’s logo are not included.
 

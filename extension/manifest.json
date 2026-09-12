@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Paprika Recipe Clipper (Unofficial)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Independent, unofficial extension for saving recipe pages to Paprika. Not affiliated with Paprika or Hindsight Labs.",
   "minimum_chrome_version": "120",
   "permissions": [

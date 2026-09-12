@@ -51,7 +51,7 @@ npm run package
 
 Browser tests use an isolated profile, synthetic credentials, example pages, and intercepted Paprika responses. They exercise onboarding, countdown closure, page capture, Unicode encoding, token isolation, duplicate prevention, and error handling without writing to a real account. Live use has been reported working by the project owner; automated fixtures do not independently verify Paprika’s current service or saved recipe fields.
 
-`npm run package` creates a deterministic ZIP in `dist/` with only the extension runtime. `npm run assets` renders store artwork using screenshots from `npm run test:browser`.
+`npm run package` creates a deterministic ZIP in `dist/` with the extension runtime and MIT license notice. `npm run assets` renders store artwork using screenshots from `npm run test:browser`.
 
 See [manual verification](docs/manual-verification.md), [store submission notes](docs/store-listing.md), and the [project brief](docs/project-brief.md).
 
