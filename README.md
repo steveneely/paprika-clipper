@@ -6,17 +6,13 @@ An independent extension, not affiliated with or endorsed by Paprika or Hindsigh
 
 ## Install
 
-The first Chrome Web Store release is being prepared. Until the store listing is available:
+[Install Paprika Recipe Clipper from the Chrome Web Store](https://chromewebstore.google.com/detail/paprika-recipe-clipper-un/bdlhgjkkjeohmmfcfpmpdjnffhkoajgn).
 
-1. Download this repository and open `chrome://extensions` in Chrome 120 or later.
-2. Enable **Developer mode**, choose **Load unpacked**, and select the `extension` folder.
-3. Pin **Paprika Recipe Clipper** in Chrome’s extensions menu.
-4. Click **Connect Paprika** and sign in on Paprika’s website. A success message counts down for three seconds, then closes the connection tab.
-5. Open a recipe webpage and click the scissors to send it to Paprika.
+1. Click **Add to Chrome**, then pin **Paprika Recipe Clipper** in Chrome’s extensions menu.
+2. Click **Connect Paprika** and sign in on Paprika’s website. A success message counts down for three seconds, then closes the connection tab.
+3. Open a recipe webpage and click the scissors to send it to Paprika.
 
 The suggested shortcut is **Alt+Shift+P**, customizable at `chrome://extensions/shortcuts`. Use the extension’s **Options** page to manage the connection without sending a page.
-
-After updating unpacked files, reload the extension in `chrome://extensions`. Start a fresh connection tab when testing onboarding changes.
 
 ## Privacy
 
@@ -34,7 +30,14 @@ Paprika controls extraction and storage. The extension uses Paprika’s undocume
 
 ## Development
 
-The extension loads directly from `extension/`; no build is required. Development uses Node 24 or later and Python 3 for packaging.
+The extension loads directly from `extension/`; no build is required. To install a development copy:
+
+1. Download or clone this repository and open `chrome://extensions` in Chrome 120 or later.
+2. Enable **Developer mode**, choose **Load unpacked**, and select the `extension` folder.
+
+After updating unpacked files, reload the extension in `chrome://extensions`. Start a fresh connection tab when testing onboarding changes.
+
+Development uses Node 24 or later and Python 3 for packaging.
 
 ```sh
 npm ci
